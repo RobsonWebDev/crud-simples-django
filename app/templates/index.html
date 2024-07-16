@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Olá, Mundo!</h1>
+    <form action="{% url "app:cadastrar" %}" method="post">{% csrf_token %}
+        <input type="text" name="nome" id="nome" placeholder="Nome">
+        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome">
+        <input type="submit" value="Cadastrar">
+    </form>
+
+    {% for p in pessoa %}
+        <div style="box-shadow: 1px 1px 1px 1px; width: 200px; padding-bottom: 5px; padding-left: 2px;">
+            <p>{{ p.nome }} {{ p.sobrenome }}</p>
+            <a href="{% url "app:editar_pessoa" p.id %}"><button style="background-color: rgb(252, 252, 78);">Editar</button></a>
+            <a href='{% url "app:excluir_pessoa" p.id %}'><button style="background-color: rgb(245, 59, 59);">Deletar</button></a>
+        </div>
+    {% endfor %}
+</body>
+</html>
